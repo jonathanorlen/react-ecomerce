@@ -1,8 +1,8 @@
-import Layout from '../modules/common/components/Layout';
+import Layout from '@common/components/Layout';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
-import ProductCard from '../modules/common/components/ProductCard'
+import ProductCard from '@common/components/ProductCard'
 
 const HomePage = ({ products }) => {
   const { list } = products;
@@ -14,10 +14,10 @@ const HomePage = ({ products }) => {
             return (
               <Grid key={product.id} item xs={6} sm={6}>
                 <ProductCard
-                  ProductId={product.id}
+                  productId={product.id}
                   img={product.img}
                   title={product.name}
-                  promoLable={product.promo}
+                  promoLabel={product.promo}
                   price={product.price}
                   rating={product.rating}
                   sold={product.sold}

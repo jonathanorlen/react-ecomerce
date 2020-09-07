@@ -9,6 +9,11 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typhography from '@material-ui/core/Typography';
 
+import PromoLabel from '../PromoLabel';
+import ProductRating from '../ProductRating';
+
+import {currencyFormatter} from '@utils/currency';
+
 const useStyles = makeStyles({
      card: {
           maxWidth: 360
@@ -18,31 +23,47 @@ const useStyles = makeStyles({
      },
      price: {
           lineHeight: 'normal'
+     },
+     relative: {
+          position: 'relative'
+     },
+     promoLabel: {
+          position: 'absolute',
+          bottom: 6,
+          left: 4
      }
 })
-const ProductCard = ({ img, title, promoLabel, price, rating, sold, ProductId }) => {
+const ProductCard = ({ img, title, promoLabel, price, rating, sold, productId }) => {
      const classes = useStyles();
 
      return (
+          <Link href="product/[id]" as={`product/${productId}`}>
           <Card>
                <div className={classes.card}>
+                    <div className={classes.relative}>
                     <CardMedia
                          className={classes.image}
                          image={img}
                          title={title}
                     />
+                    <div className={classes.promoLabel}>
+                         <PromoLabel promoLabel={promoLabel}/>
+                    </div>
+                    </div>
                     <CardContent>
                          <Grid container direction="column">
                               <Typhography gutterBottom variant="subtitle" component="h2">
                                    {title}
                               </Typhography>
                               <Typhography variant="overline" className={classes.price}>
-                                   {price}
+                                   {currencyFormatter(price)}
                               </Typhography>
+                              <ProductRating rating={rating} sold={sold}/>
                          </Grid>
                     </CardContent>
                </div>
           </Card>
+          </Link>
      )
 }
 
